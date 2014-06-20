@@ -1,6 +1,7 @@
-Lavender Theme for NodeBB
+NFC Ring Theme for NodeBB
 =========================
 
+Tweaked version of Lavender theme for use with NFC Ring Single SIgn On.
 A simple theme for NodeBB. Check out the theming guide that accompanies this work at http://burnaftercompiling.com/nodebb/nodebb-hands-on-theming-guide-part-1/
 
 
