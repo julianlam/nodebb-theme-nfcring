@@ -1,11 +1,11 @@
 {
-  "name": "nodebb-theme-lavender",
+  "name": "nodebb-theme-nfcring",
   "version": "0.0.61",
-  "description": "Lavender Theme for NodeBB",
+  "description": "NFC Ring Theme for NodeBB - Based on Lavender",
   "main": "theme.less",
   "repository": {
     "type": "git",
-    "url": "https://github.com/psychobunny/nodebb-theme-lavender"
+    "url": "https://github.com/mclear/nodebb-theme-nfcring"
   },
   "keywords": [
     "nodebb",
