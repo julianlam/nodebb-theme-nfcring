@@ -126,5 +126,20 @@ $('document').ready(function() {
 
 			return refreshTitle(url);
 		};
+
+    // Hook the existing logout function for NFC Ring SSO url		
+    nfcringlogout = function() {
+      $.post(RELATIVE_PATH + '/logout', {
+        _csrf: $('#csrf_token').val()
+      }, function() {
+        window.location.href = 'https://me.nfcring.com/logout?redirect=forum.nfcring.com';
+      });
+    };
+    
+    (function () {
+      $('#logout-link').off('click').on('click', nfcringlogout );
+    });
+		
 	}());
+	
 });
