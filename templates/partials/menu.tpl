@@ -6,7 +6,7 @@
 				</button>
 				<div>
 					<a href="{relative_path}/">
-						<img class="{brand:logo:display} forum-logo" src="{brand:logo}" alt="{title}" />
+						<img class="{brand:logo:display} forum-logo" src="{brand:logo}" />
 					</a>
 					<a href="{relative_path}/">
 						<h1 class="navbar-brand forum-title">{title}</h1>
@@ -20,11 +20,17 @@
 
 			<div class="navbar-collapse collapse navbar-ex1-collapse">
 				<ul id="main-nav" class="nav navbar-nav pull-left">
-					<li class="nodebb-loggedin">
+					<!-- IF isLoggedIn -->
+					<li>
 						<a href="{relative_path}/unread"><i id="unread-count" class="fa fa-fw fa-inbox" data-content="0" title="[[global:header.unread]]"></i><span class="visible-xs-inline"> [[global:header.unread]]</span></a>
 					</li>
+					<!-- ENDIF isLoggedIn -->
+
 					<li>
 						<a href="{relative_path}/recent"><i class="fa fa-fw fa-clock-o" title="[[global:header.recent]]"></i><span class="visible-xs-inline"> [[global:header.recent]]</span></a>
+					</li>
+					<li>
+						<a href="{relative_path}/tags"><i class="fa fa-fw fa-tags" title="[[global:header.tags]]"></i><span class="visible-xs-inline"> [[global:header.tags]]</span></a>
 					</li>
 					<li>
 						<a href="{relative_path}/popular"><i class="fa fa-fw fa-fire" title="[[global:header.popular]]"></i><span class="visible-xs-inline"> [[global:header.popular]]</span></a>
@@ -59,7 +65,8 @@
 					<!-- END navigation -->
 				</ul>
 
-				<ul id="logged-in-menu" class="nav navbar-nav navbar-right hide pull-right">
+				<!-- IF isLoggedIn -->
+				<ul id="logged-in-menu" class="nav navbar-nav navbar-right pull-right">
 					<li class="notifications dropdown text-center hidden-xs">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="notif_dropdown"><i class="fa fa-fw fa-bell-o" data-content="0" title="[[global:header.notifications]]"></i></a>
 						<ul id="notif-list" class="dropdown-menu" aria-labelledby="notif_dropdown">
@@ -84,11 +91,11 @@
 
 					<li id="user_label" class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="user_dropdown" title="[[global:header.profile]]">
-							<img src=""/>
+							<img id="user-header-picture" src="{user.picture}"/>
 						</a>
 						<ul id="user-control-list" class="dropdown-menu" aria-labelledby="user_dropdown">
 							<li>
-								<a id="user-profile-link" href=""><i class="fa fa-circle status-offline"></i><span>[[global:header.profile]]</span></a>
+								<a id="user-profile-link" href="{relative_path}/user/{user.userslug}"><i class="fa fa-circle status {user.status}"></i> <span id="user-header-name">{user.username}</span></a>
 							</li>
 							<li id="logout-link">
 								<a href="#">[[global:logout]]</a>
@@ -109,7 +116,7 @@
 						</ul>
 					</li>
 				</ul>
-
+				<!-- ELSE -->
 				<ul id="logged-out-menu" class="nav navbar-nav navbar-right pull-right">
 					<!-- IF allowRegistration -->
 					<li>
@@ -120,15 +127,15 @@
 					</li>
 					<!-- ENDIF allowRegistration -->
 					<li>
-						<a href="https://me.nfcring.com/login?redirect=forum.nfcring.com">
+            <a href="https://me.nfcring.com/login?redirect=forum.nfcring.com">
 							<i class="fa fa-sign-in visible-xs-inline"></i>
 							<span>[[global:login]]</span>
 						</a>
 					</li>
 				</ul>
-
+				<!-- ENDIF isLoggedIn -->
 				<!-- IF searchEnabled -->
-				<ul id="logged-conditional-menu" class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right">
 					<li>
 						<form id="search-form" class="navbar-form navbar-right hidden-xs" role="search" method="GET" action="">
 							<div class="hide" id="search-fields">
@@ -137,7 +144,7 @@
 								</div>
 								<button type="submit" class="btn btn-default hide">[[global:search]]</button>
 							</div>
-							<button id="search-button" type="button" class="btn btn-link hide"><i class="fa fa-search fa-fw" title="[[global:header.search]]"></i></button>
+							<button id="search-button" type="button" class="btn btn-link"><i class="fa fa-search fa-fw" title="[[global:header.search]]"></i></button>
 						</form>
 					</li>
 				</ul>
@@ -165,4 +172,4 @@
 				<div class="header-topic-title hidden-xs">
 					<span></span>
 				</div>
-			</div>
+			</div>			
