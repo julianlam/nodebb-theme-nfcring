@@ -96,6 +96,8 @@ $('document').ready(function() {
 			fixed = parseInt(fixed, 10) === 1 ? 0 : 1;
 			resize(fixed);
 		});
+
+		$('#logout-link').off('click').on('click', nfcringlogout);
 	});
 
 	(function() {
@@ -127,19 +129,16 @@ $('document').ready(function() {
 			return refreshTitle(url);
 		};
 
-    // Hook the existing logout function for NFC Ring SSO url		
-    nfcringlogout = function() {
-      $.post(RELATIVE_PATH + '/logout', {
-        _csrf: $('#csrf_token').val()
-      }, function() {
-        window.location.href = 'https://me.nfcring.com/logout?redirect=forum.nfcring.com';
-      });
-    };
-    
-    (function () {
-      $('#logout-link').off('click').on('click', nfcringlogout );
-    });
-		
+		// Hook the existing logout function for NFC Ring SSO url
+		window.nfcringlogout = function(e) {
+			// Stop regular logout click handler from firing
+			e.stopPropagation();
+
+			$.post(RELATIVE_PATH + '/logout', {
+				_csrf: $('#csrf_token').val()
+			}, function() {
+				window.location.href = 'https://me.nfcring.com/logout?redirect=forum.nfcring.com';
+			});
+		};
 	}());
-	
 });
