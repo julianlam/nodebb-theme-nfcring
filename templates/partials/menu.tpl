@@ -127,7 +127,7 @@
 					</li>
 					<!-- ENDIF allowRegistration -->
 					<li>
-            <a href="https://me.nfcring.com/login?redirect=forum.nfcring.com">
+				               <a href="https://me.nfcring.com/login">
 							<i class="fa fa-sign-in visible-xs-inline"></i>
 							<span>[[global:login]]</span>
 						</a>
