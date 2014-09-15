@@ -71,6 +71,7 @@ $('document').ready(function() {
 
 				resize(fixed);
 			}
+	                $('#loginButton').attr("href","https://me.nfcring.com/login?redirect=forum.nfcring.com"+window.location.pathname);
 		});
 
 		$(window).on('action:widgets.loaded', function(ev, data) {
@@ -96,11 +97,11 @@ $('document').ready(function() {
 			fixed = parseInt(fixed, 10) === 1 ? 0 : 1;
 			resize(fixed);
 		});
-
 		$('#logout-link').off('click').on('click', nfcringlogout);
 	});
 
 	(function() {
+
 		// loading animation
 		var ajaxifyGo = ajaxify.go,
 			loadData = ajaxify.loadData,
@@ -108,7 +109,7 @@ $('document').ready(function() {
 			loadingBar = $('.loading-bar');
 
 		ajaxify.go = function(url, callback, quiet) {
-			loadingBar.fadeIn(0).removeClass('reset')
+			loadingBar.fadeIn(0).removeClass('reset');
 			return ajaxifyGo(url, callback, quiet);
 		};
 
