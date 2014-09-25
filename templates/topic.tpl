@@ -43,11 +43,12 @@
 									<a href="<!-- IF posts.user.userslug -->{relative_path}/user/{posts.user.userslug}<!-- ELSE -->#<!-- ENDIF posts.user.userslug -->">
 										<img src="{posts.user.picture}" alt="{posts.user.username}" class="profile-image user-img" title="{posts.user.username}">
 									</a>
+									<small class="username" title="{posts.user.username}"><a href="<!-- IF posts.user.userslug -->{relative_path}/user/{posts.user.userslug}<!-- ELSE -->#<!-- ENDIF posts.user.userslug -->">{posts.user.username}</a></small>
 
 									<!-- IF posts.user.groups.length -->
 									<div class="text-center">
 									<!-- BEGIN groups -->
-									<span class="label inline-block" style="background-color: {posts.user.groups.labelColor};"><i class="fa {posts.user.groups.icon}"></i> {posts.user.groups.userTitle}</span><br/>
+									<a href="{relative_path}/groups/{posts.user.groups.name}"><span class="label group-label inline-block" style="background-color: {posts.user.groups.labelColor};"><!-- IF posts.user.groups.icon --><i class="fa {posts.user.groups.icon}"></i> <!-- ENDIF posts.user.groups.icon -->{posts.user.groups.userTitle}</span></a><br/>
 									<!-- END groups -->
 									</div>
 									<!-- ENDIF posts.user.groups.length -->
@@ -55,7 +56,8 @@
 								<div class="topic-text">
 									<!-- IF @first -->
 									<h3 class="topic-title">
-										<p id="topic_title_{posts.pid}" class="topic-title" itemprop="name">{title}</p>
+										<p id="topic_title_{posts.pid}" class="topic-title" itemprop="name"><i class="fa fa-thumb-tack hide"></i> <i class="fa fa-lock hide"></i> {title}</p>
+										<hr>
 									</h3>
 									<!-- ENDIF @first -->
 									<div id="content_{posts.pid}" class="post-content" itemprop="text">{posts.content}</div>
@@ -72,9 +74,9 @@
 								<small class="pull-right">
 									<span>
 										<!-- IF posts.user.userslug -->
-										<i class="fa fa-circle status offline"></i>
+										<i class="fa fa-circle status {posts.user.status}" title='[[global:{posts.user.status}]]'></i>
 										<!-- ENDIF posts.user.userslug -->
-										<span class="username-field" data-username="{posts.user.username}">
+										<span class="username-field" data-username="{posts.user.username}" data-uid="{posts.user.uid}">
 											<!-- IF posts.user.userslug -->
 											[[global:user_posted_ago, <a href="{relative_path}/user/{posts.user.userslug}" itemprop="author">{posts.user.username}</a>, <span class="timeago" title="{posts.relativeTime}"></span>]]
 											<!-- ELSE -->
@@ -125,14 +127,18 @@
 										</li>
 									</ul>
 								</div>
+								<!-- IF !reputation:disabled -->
 								&bull;
 								<a href="#" class="upvote <!-- IF posts.upvoted --> upvoted btn-primary <!-- ENDIF posts.upvoted -->">
 									<i class="fa fa-chevron-up"></i>
 								</a>
 								<span class="votes" data-votes="{posts.votes}">{posts.votes}</span>
+								<!-- IF !downvote:disabled -->
 								<a href="#" class="downvote <!-- IF posts.downvoted --> downvoted btn-primary <!-- ENDIF posts.downvoted -->">
 									<i class="fa fa-chevron-down"></i>
 								</a>
+								<!-- ENDIF !downvote:disabled -->
+								<!-- ENDIF !reputation:disabled -->
 
 								<!-- IF posts.user.custom_profile_info.length -->
 									<!-- BEGIN custom_profile_info -->
@@ -142,7 +148,9 @@
 								<span class="post-tools">
 									<!-- IF !posts.selfPost -->
 									<!-- IF posts.user.userslug -->
+									<!-- IF loggedIn -->
 									<button class="btn btn-sm btn-link chat" type="button" title="[[topic:chat]]"><i class="fa fa-comment"></i><span class="hidden-xs-inline"> [[topic:chat]]</span></button>
+									<!-- ENDIF loggedIn -->
 									<!-- ENDIF posts.user.userslug -->
 									<!-- ENDIF !posts.selfPost -->
 									<!-- IF privileges.topics:reply -->
@@ -150,7 +158,9 @@
 									<button class="btn btn-sm btn-link post_reply" type="button"><i class="fa fa-reply"></i><span class="hidden-xs-inline"> [[topic:reply]]</span></button>
 									<!-- ENDIF privileges.topics:reply -->
 									<!-- IF !posts.selfPost -->
+									<!-- IF loggedIn -->
 									<button class="btn btn-sm btn-link flag" type="button" title="[[topic:flag_title]]"><i class="fa fa-flag-o"></i><span class="hidden-xs-inline"> [[topic:flag]]</span></button>
+									<!-- ENDIF loggedIn -->
 									<!-- ENDIF !posts.selfPost -->
 									<!-- IF posts.display_moderator_tools -->
 										<button class="btn btn-sm btn-link edit" type="button" title="[[topic:edit]]"><i class="fa fa-pencil"></i><span class="hidden-xs-inline"> [[topic:edit]]</span></button>
@@ -191,6 +201,7 @@
 	<!-- IMPORT partials/move_thread_modal.tpl -->
 	<!-- IMPORT partials/fork_thread_modal.tpl -->
 	<!-- IMPORT partials/move_post_modal.tpl -->
+	<span class="hidden" id="csrf" data-csrf="{csrf}"></span>
 </div>
 
 <!-- IMPORT partials/noscript/paginator.tpl -->
