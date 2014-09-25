@@ -71,7 +71,9 @@ $('document').ready(function() {
 
 				resize(fixed);
 			}
-	                $('#loginButton').attr("href","https://me.nfcring.com/login?redirect=forum.nfcring.com"+window.location.pathname);
+			
+			$('#loginButton').attr("href","https://me.nfcring.com/login?redirect=forum.nfcring.com"+window.location.pathname);
+			$('#logout-link').off('click').on('click', nfcringlogout);
 		});
 
 		if (!$('.admin').length) {
@@ -122,8 +124,6 @@ $('document').ready(function() {
 		$(window).on('action:ajaxify.loadingTemplates', function() {
 			loadingBar.css('width', '90%');
 		});
-
-		$('#logout-link').off('click').on('click', nfcringlogout);
 
 		app.refreshTitle = function(url) {
 			loadingBar.css('width', '100%');
