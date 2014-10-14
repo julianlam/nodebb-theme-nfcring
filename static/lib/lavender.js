@@ -71,8 +71,20 @@ $('document').ready(function() {
 
 				resize(fixed);
 			}
-			
-			$('#loginButton').attr("href","https://me.nfcring.com/login?redirect=forum.nfcring.com"+window.location.pathname);
+		});
+
+		$(window).on('action:connected', function() {
+			$('#loginButton')
+				.attr("href","https://me.nfcring.com/login?redirect=forum.nfcring.com"+window.location.pathname)
+				.on('click', function() {
+					$.ajax({
+						url: RELATIVE_PATH + '/nfcring/returnTo',
+						type: 'PUT',
+						data: {
+							url: window.location.pathname.replace(RELATIVE_PATH, '')
+						}
+					});
+				});
 			$('#logout-link').off('click').on('click', nfcringlogout);
 		});
 

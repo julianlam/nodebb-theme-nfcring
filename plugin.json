@@ -1,10 +1,9 @@
 {
 	"id": "nodebb-theme-nfcring",
-	"library": "./lib/theme.js",
+	"library": "lib/theme.js",
 	"hooks": [
-		{
-			"hook": "filter:widgets.getAreas", "method": "defineWidgetAreas", "callbacked": true
-		}
+		{ "hook": "static:app.load", "method": "init" },
+		{ "hook": "filter:widgets.getAreas", "method": "defineWidgetAreas" }
 	],
 	"staticDirs": {
 		"vendor": "static/vendor"
