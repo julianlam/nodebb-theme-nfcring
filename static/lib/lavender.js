@@ -63,7 +63,7 @@ $('document').ready(function() {
 		$(window).on('action:ajaxify.end', function(ev, data) {
 			var url = data.url;
 
-			if(!/^\/admin\//.test(url) && !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+			if(!/^admin\//.test(url) && !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 				if (url === "") {
 					doMasonry();
 					$('.category-header .badge i').tooltip();
@@ -71,8 +71,20 @@ $('document').ready(function() {
 
 				resize(fixed);
 			}
-			
-			$('#loginButton').attr("href","https://me.nfcring.com/login?redirect=forum.nfcring.com"+window.location.pathname);
+		});
+
+		$(window).on('action:connected', function() {
+			$('#loginButton')
+				.attr("href","https://me.nfcring.com/login?redirect=forum.nfcring.com"+window.location.pathname)
+				.on('click', function() {
+					$.ajax({
+						url: RELATIVE_PATH + '/nfcring/returnTo',
+						type: 'PUT',
+						data: {
+							url: window.location.pathname.replace(RELATIVE_PATH, '')
+						}
+					});
+				});
 			$('#logout-link').off('click').on('click', nfcringlogout);
 		});
 
@@ -111,15 +123,12 @@ $('document').ready(function() {
 	(function() {
 
 		// loading animation
-		var ajaxifyGo = ajaxify.go,
-			loadData = ajaxify.loadData,
-			refreshTitle = app.refreshTitle,
+		var refreshTitle = app.refreshTitle,
 			loadingBar = $('.loading-bar');
 
-		ajaxify.go = function(url, callback, quiet) {
+		$(window).on('action:ajaxify.start', function(data) {
 			loadingBar.fadeIn(0).removeClass('reset');
-			return ajaxifyGo(url, callback, quiet);
-		};
+		});
 
 		$(window).on('action:ajaxify.loadingTemplates', function() {
 			loadingBar.css('width', '90%');
