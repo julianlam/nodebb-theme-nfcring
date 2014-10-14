@@ -1,6 +1,6 @@
 {
   "name": "nodebb-theme-nfcring",
-  "version": "0.0.61",
+  "version": "0.1.11",
   "description": "NFC Ring Theme for NodeBB - Based on Lavender",
   "main": "theme.less",
   "repository": {
