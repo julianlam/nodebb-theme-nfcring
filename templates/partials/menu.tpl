@@ -5,11 +5,11 @@
 					<span class="icon-bar"></span>
 				</button>
 				<div>
-					<a href="{relative_path}/">
+					<a href="{config.relative_path}/">
 						<img class="{brand:logo:display} forum-logo" src="{brand:logo}" />
 					</a>
 					<!-- IF showSiteTitle -->
-					<a href="{relative_path}/">
+					<a href="{config.relative_path}/">
 						<h1 class="navbar-brand forum-title">{title}</h1>
 					</a>
 					<!-- ENDIF showSiteTitle -->
@@ -26,7 +26,7 @@
 					<!-- BEGIN navigation -->
 					<!-- IF function.displayMenuItem, @index -->
 					<li class="{navigation.class}">
-						<a href="{relative_path}{navigation.route}" title="{navigation.title}" id="{navigation.id}" target="{navigation.properties.target}">
+						<a href="{config.relative_path}{navigation.route}" title="{navigation.title}" id="{navigation.id}" target="{navigation.properties.target}">
 							<!-- IF navigation.iconClass -->
 							<i class="fa fa-fw {navigation.iconClass}"></i>
 							<!-- ENDIF navigation.iconClass -->
@@ -55,20 +55,20 @@
 								</ul>
 							</li>
 							<li class="notif-dropdown-link"><a href="#" class="mark-all-read">[[notifications:mark_all_read]]</a></li>
-							<li class="notif-dropdown-link"><a href="{relative_path}/notifications">[[notifications:see_all]]</a></li>
+							<li class="notif-dropdown-link"><a href="{config.relative_path}/notifications">[[notifications:see_all]]</a></li>
 						</ul>
 					</li>
 
 					<!-- IF searchEnabled -->
 					<li class="visible-xs">
-						<a href="{relative_path}/search">
+						<a href="{config.relative_path}/search">
 							<i class="fa fa-search fa-fw"></i> [[global:search]]
 						</a>
 					</li>
 					<!-- ENDIF searchEnabled -->
 
 					<li class="visible-xs">
-						<a href="{relative_path}/notifications" title="[[notifications:title]]">
+						<a href="{config.relative_path}/notifications" title="[[notifications:title]]">
 							<i class="notification-icon fa fa-bell-o fa-fw" data-content="0"></i> [[notifications:title]]
 						</a>
 					</li>
@@ -87,7 +87,7 @@
 									</li>
 								</ul>
 							</li>
-							<li class="notif-dropdown-link"><a href="{relative_path}/chats">[[modules:chat.see_all]]</a></li>
+							<li class="notif-dropdown-link"><a href="{config.relative_path}/chats">[[modules:chat.see_all]]</a></li>
 						</ul>
 					</li>
 					<!-- ENDIF !disableChat -->
@@ -98,7 +98,7 @@
 						</a>
 						<ul id="user-control-list" class="dropdown-menu" aria-labelledby="user_dropdown">
 							<li>
-								<a id="user-profile-link" href="{relative_path}/user/{user.userslug}">
+								<a id="user-profile-link" href="{config.relative_path}/user/{user.userslug}">
 									<i class="fa fa-fw fa-circle status {user.status}"></i> <span id="user-header-name">{user.username}</span>
 								</a>
 							</li>
@@ -192,7 +192,7 @@
 				<!-- ELSE -->
 				<ul class="nav navbar-nav navbar-right pull-right">
 					<li>
-						<a href="{relative_path}/login">
+						<a href="{config.relative_path}/login">
 							<i class="fa fa-sign-in visible-xs-inline"></i>
 							<span>[[global:login]]</span>
 						</a>
