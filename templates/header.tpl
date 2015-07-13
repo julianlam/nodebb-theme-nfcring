@@ -6,6 +6,7 @@
 	{function.buildMetaTag}
 	<!-- END metaTags -->
 	<link rel="stylesheet" type="text/css" href="{relative_path}/stylesheet.css?{css-buster}" />
+	<!-- IF bootswatchCSS --><link href="{bootswatchCSS}" rel="stylesheet" media="screen"><!-- ENDIF bootswatchCSS -->
 	<!-- BEGIN linkTags -->
 	<link<!-- IF linkTags.link --> link="{linkTags.link}"<!-- ENDIF linkTags.link --><!-- IF linkTags.rel --> rel="{linkTags.rel}"<!-- ENDIF linkTags.rel --><!-- IF linkTags.type --> type="{linkTags.type}"<!-- ENDIF linkTags.type --><!-- IF linkTags.href --> href="{linkTags.href}"<!-- ENDIF linkTags.href --> />
 	<!-- END linkTags -->
@@ -19,30 +20,27 @@
 
 	<script>
 		var RELATIVE_PATH = "{relative_path}";
-		var config = JSON.parse('{configJSON}');
+		var config = JSON.parse('{{configJSON}}');
 		var app = {
-			template: "{template.name}"
+			template: "{template.name}",
+			user: JSON.parse('{{userJSON}}')
 		};
-		app.user = JSON.parse('{userJSON}');
 	</script>
 	<script src="{relative_path}/nodebb.min.js?{script-buster}"></script>
 	<!-- IMPORT partials/requirejs-config.tpl -->
-
 	<!-- IF useCustomJS -->
-	{customJS}
+	{{customJS}}
 	<!-- ENDIF useCustomJS -->
 	<!-- IF useCustomCSS -->
-	<style type="text/css">{customCSS}</style>
+	<style type="text/css">{{customCSS}}</style>
 	<!-- ENDIF useCustomCSS -->
-
 </head>
 
 <body>
-	<div class="navbar navbar-default navbar-fixed-top header" role="navigation" id="header-menu">
-		<div class="loading-bar"></div>
+	<div class="navbar navbar-default navbar-fixed-top header" role="navigation" id="header-menu" component="navbar">
 		<div class="container">
 			<!-- IMPORT partials/menu.tpl -->
 		</div>
 	</div>
-	<div class="container" id="content">
+	<div class="container" id="content" component="content">
 	<!-- IMPORT partials/noscript/warning.tpl -->

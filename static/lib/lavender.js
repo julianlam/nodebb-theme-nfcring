@@ -144,10 +144,16 @@ $('document').ready(function() {
 			// Stop regular logout click handler from firing
 			e.stopPropagation();
 
-			$.post(RELATIVE_PATH + '/logout', {
-				_csrf: $('#csrf_token').val()
-			}, function() {
-				window.location.href = 'https://me.nfcring.com/logout?redirect=forum.nfcring.com';
+			require(['csrf'], function(csrf) {
+				$.ajax(RELATIVE_PATH + '/logout', {
+					type: 'POST',
+					headers: {
+						'x-csrf-token': csrf.get()
+					},
+					success: function() {
+						window.location.href = 'https://me.nfcring.com/logout?redirect=forum.nfcring.com';
+					}
+				});
 			});
 		};
 	});
