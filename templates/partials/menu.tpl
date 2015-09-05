@@ -40,7 +40,7 @@
 					<!-- END navigation -->
 				</ul>
 
-				<!-- IF loggedIn -->
+				<!-- IF config.loggedIn -->
 				<ul id="logged-in-menu" class="nav navbar-nav navbar-right pull-right">
 					<li class="notifications dropdown text-center hidden-xs">
 						<a href="#" title="[[global:header.notifications]]" class="dropdown-toggle" data-toggle="dropdown" id="notif_dropdown">
@@ -139,7 +139,7 @@
 						</a>
 					</li>
 				</ul>
-				<!-- ENDIF loggedIn -->
+				<!-- ENDIF config.loggedIn -->
 				<!-- IF searchEnabled -->
 				<ul class="nav navbar-nav navbar-right">
 					<li>
